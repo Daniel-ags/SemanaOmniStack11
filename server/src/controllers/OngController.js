@@ -13,7 +13,7 @@ module.exports = {
     },
 
     // Função que cria uma "ong" na tabela 'ongs'
-    async create(request, response){
+    async create(request, response) {
         const {name, email, whatsapp, city, uf} = request.body;
 
         const id = crypto.randomBytes(4).toString('HEX');
@@ -27,5 +27,11 @@ module.exports = {
             uf,
     })
     return response.json({ id });
+    },
+
+    async delete(request, response) {
+        await connection('ongs').delete('*');
+
+        return response.json({ text: "Tudo deletado! Parabéns!" })
     }
 };
