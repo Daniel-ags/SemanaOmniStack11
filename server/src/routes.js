@@ -10,8 +10,16 @@ const AdminController = require('./controllers/AdminController');
 // Criação e definição do roteador e rotas da aplicação
 const routes = express.Router();
 
+// Controladores especiais ADM para limpeza de dados
+
+routes.delete('/incidents/adm', AdminController.deleteAllIncidents);
+routes.delete('/ongs/adm', AdminController.deleteAllOngs);
+routes.get('/incidents/adm', AdminController.listAllIncidents);
+
+
 routes.get('/ongs', OngController.index);
 routes.post('/ongs', OngController.create);
+routes.delete('/ongs', OngController.delete);
 
 
 routes.get('/incidents', IncidentController.index);
@@ -22,11 +30,5 @@ routes.get('/profile', ProfileController.index);
 
 routes.post('/sessions', SessionController.create);
 
-// Controladores especiais ADM para limpeza de dados
-
-routes.delete('/incidents', AdminController.deleteAllIncidents);
-routes.delete('/ongs', AdminController.deleteAllOngs);
-routes.get('/incidets', AdminController.listAllIncidents);
-routes.get('/ongs', AdminController.listAllOngs);
 
 module.exports = routes;

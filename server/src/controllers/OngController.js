@@ -30,8 +30,11 @@ module.exports = {
     },
 
     async delete(request, response) {
-        await connection('ongs').delete('*');
+        const ongDeleteId = request.headers.authorization
+        await connection('ongs')
+        .where('id', ongDeleteId)
+        .delete('id')
 
-        return response.json({ text: "Tudo deletado! Parabéns!" })
+        return response.json({ text: `A ong com ID  ${ongDeleteId} foi deletada.` })
     }
 };
