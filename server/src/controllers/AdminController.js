@@ -16,6 +16,7 @@ module.exports = {
     async listAllIncidents(request, response) {
         const incidents = await connection('incidents')
         .select('*')
+        response.header('X-Total-Count', count['count(*)']);
 
         return response.json({incidents})
     },
